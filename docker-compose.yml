@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - /var/lib/postgresql/data
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=tgbot
+      - POSTGRES_USER=tmshnk0
+      - POSTGRES_PASSWORD=1312
+  app:
+    image: tg_bot
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=tgbot
+      - POSTGRES_USER=tmshnk0
+      - POSTGRES_PASSWORD=1312
+      - BOT_TOKEN=6095504154:AAFRpRz8JTlnsxdIeV8yQShRVkMCmBTwJ08
+    depends_on:
+      - db
